@@ -3,12 +3,12 @@
         <h2>Modify student :</h2>
     </div>
     <form >
-        <div class="col-sm-2 col-md-2 col-lg-2">
-            <label >ID Student</label>
-            <input type="number" [(ngModel)]="currentStudent.id" name="id" class="form-control">
+        <div hidden class="col-sm-2 col-md-2 col-lg-2">
+            <label >ID </label>
+            <input readonly type="number" [(ngModel)]="currentStudent.id" name="id" class="form-control">
             </div>
             <div class="col-sm-2 col-md-2 col-lg-2">
-                <label >CIN Student</label>
+                <label >CIN</label>
                 <input type="number" [(ngModel)]="currentStudent.CIN" name="CIN" class="form-control">
                 </div>
             <div class="col-sm-4 col-md-4 col-lg-4" >
@@ -22,6 +22,13 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
                 <label >Bac generation</label>
                 <input type="number" [(ngModel)]= "currentStudent.bacgeneration" name="bacgeneration" class="form-control">
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="updatedCatId">
+                    <option *ngFor="let cat of categorys" [value]="cat.idCat" >
+                        {{cat.nameCat}}
+                    </option>
+                </select>
             </div>
     <div class="mt-2">
         <button type="submit" (click)="updateStudent()" class="btn btn-success">Modifer</button>

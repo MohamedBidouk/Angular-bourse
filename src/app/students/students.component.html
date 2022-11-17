@@ -9,6 +9,7 @@
                         <th>firstname</th>
                         <th>lastname</th>
                         <th>bacgeneration</th>
+                        <th>Category</th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let student of students">
@@ -18,6 +19,7 @@
                         <td>{{student.firstname}}</td>
                         <td>{{student.lastname}}</td>
                         <td>{{student.bacgeneration}}</td>
+                        <td>{{student.category.nameCat}}</td>
                         <td><a class="btn btn-danger" (click)="deleteStudent(student)">Delete</a></td>
                         <td><a class="btn btn-success" [routerLink]="['/updateStudent',student.id]">Modify</a></td>
                     </tr>
