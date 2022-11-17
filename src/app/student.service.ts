@@ -1,58 +1,45 @@
 import { Injectable } from '@angular/core';
 import { Student } from './model/student.model';
 import { Category } from './model/category.model';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = { headers: new HttpHeaders( {'Content-Type': 'application/json'} )};
 
 @Injectable({
 providedIn: 'root'
 })
 export class StudentService {
-  students : Student[]; //un tableau de Produit
+
+  apiURL: string = "http://localhost:8080/Bourse-app/api";
+
+  students! : Student[]; //un tableau de Produit
   student! : Student;
-  categorys : Category[];
-  constructor() {
-    this.categorys = [
-      {idCat: 1, nameCat: "new candidate", descriptionCat:"2020"},
-      {idCat: 2, nameCat: "old candidate", descriptionCat:"2019"},
-      {idCat: 2, nameCat: "mid candidate", descriptionCat:"2019"}
-    ];
-  this.students = [
-    {id : 1, CIN : 365528, firstname : "Mohamed", lastname: "Bidouk", bacgeneration : 2020, category: {idCat: 1, nameCat: "new candidate", descriptionCat:"2020"}},
-    {id : 2, CIN : 365528, firstname : "Mohamed", lastname: "Bidouk", bacgeneration : 2020, category: {idCat: 1, nameCat: "old candidate", descriptionCat:"2020"}},
-    {id : 3, CIN : 365528, firstname : "Mohamed", lastname: "Bidouk", bacgeneration : 2020, category: {idCat: 1, nameCat: "mid candidate", descriptionCat:"2020"}}
-  ];
+  //categorys : Category[];
+  constructor(private http : HttpClient) {
+    
   }
 
-  listStudents():Student[] {
-    return this.students;
+  listStudents():Observable<Student[]> {
+    return this.http.get<Student[]>(this.apiURL);
   }
 
-  addStudent( stud: Student){
-    this.students.push(stud);
+  addStudent( stud: Student): Observable<Student>{
+    return this.http.post<Student>(this.apiURL, stud, httpOptions);
   }
 
-  deleteStudent( stud: Student){
-    //supprimer le produit prod du tableau produits
-    const index = this.students.indexOf(stud, 0);
-    if (index > -1) {
-    this.students.splice(index, 1);
-    }
-    //ou Bien
-    /* this.produits.forEach((cur, index) => {
-    if(prod.idProduit === cur.idProduit) {
-    this.produits.splice(index, 1);
-    }
-    }); */
+  deleteStudent( id: number){
+    const url = `${this.apiURL}/${id}`;
+      return this.http.delete(url, httpOptions);
     }
 
-    consultStudent(id:number): Student{
-      this.student = this.students.find(s => s.id == id)!;
-      return this.student;
+    consultStudent(id:number): Observable<Student>{
+      const url = `${this.apiURL}/${id}`;
+        return this.http.get<Student>(url);
       }
 
-    updateStudent(s: Student){
-      this.deleteStudent(s);
-      this.addStudent(s);
-      this.sortStudents
+    updateStudent(stud: Student): Observable<Student>{
+      return this.http.put<Student>(this.apiURL, stud, httpOptions);
     }
 
     sortStudents(){
@@ -67,11 +54,11 @@ export class StudentService {
       });
     }
 
-    listCategorys():Category[]{
-      return this.categorys;
+    listCategorys():Observable<Category[]>{
+      return this.http.get<Category[]>(this.apiURL+"/cat");
     }
 
-    consultCategory(id:number): Category{
+    /*consultCategory(id:number): Category{
       return this.categorys.find(cat => cat.idCat == id)!;
-      }
+      } */
 }

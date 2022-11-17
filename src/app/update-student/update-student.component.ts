@@ -21,15 +21,19 @@ export class UpdateStudentComponent implements OnInit {
               private studentService: StudentService) { }
 
   ngOnInit():  void{
-    this.categorys = this.studentService.listCategorys();
-    this.currentStudent = this.studentService.consultStudent(this.activatedRoute.snapshot.params['id']);
-    this.updatedCatId = this.currentStudent.category.idCat;
+    this.studentService.listCategorys().subscribe(cats => {this.categorys = cats;
+      console.log(cats);
+      });
+      this.studentService.consultStudent(this.activatedRoute.snapshot.params['id']).subscribe( stud =>{ this.currentStudent = stud;
+      this.updatedCatId = this.currentStudent.category.idCat;
+      } ) ;
   }
 
   updateStudent(){
-    this.currentStudent.category = this.studentService.consultCategory(this.updatedCatId);
-    this.studentService.updateStudent(this.currentStudent);
-    this.router.navigate(['students']);
+    this.currentStudent.category = this.categorys.find(cat => cat.idCat == this.updatedCatId)!;
+    this.studentService.updateStudent(this.currentStudent).subscribe(stud => {
+    this.router.navigate(['students']); }
+    );
   }
 
 }

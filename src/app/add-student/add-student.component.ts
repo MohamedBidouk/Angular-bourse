@@ -20,15 +20,18 @@ export class AddStudentComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.categorys = this.studentService.listCategorys();
+    this.studentService.listCategorys().subscribe(cats => {this.categorys = cats;
+    console.log(cats);
+    });
   }
 
   addStudent(){
-    this.newCategory = this.studentService.consultCategory(this.newIdCat);
-    this.newStudent.category = this.newCategory;
-    //console.log(this.newStudent);
-    this.studentService.addStudent(this.newStudent);
-    this.router.navigate(['students']);
+    this.newStudent.category = this.categorys.find(cat => cat.idCat == this.newIdCat)!;
+    this.studentService.addStudent(this.newStudent)
+                        .subscribe(stud => {
+                        console.log(stud);
+                        this.router.navigate(['students']);
+                        });
   }
 
 }

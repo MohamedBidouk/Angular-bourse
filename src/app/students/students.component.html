@@ -15,10 +15,10 @@
                 <tbody *ngFor="let student of students">
                     <tr >
                         <td>{{student.id}}</td>
-                        <td>{{student.CIN}}</td>
-                        <td>{{student.firstname}}</td>
-                        <td>{{student.lastname}}</td>
-                        <td>{{student.bacgeneration}}</td>
+                        <td>{{student.cin}}</td>
+                        <td>{{student.firstName}}</td>
+                        <td>{{student.lastName}}</td>
+                        <td>{{student.bacGeneration}}</td>
                         <td>{{student.category.nameCat}}</td>
                         <td><a class="btn btn-danger" (click)="deleteStudent(student)">Delete</a></td>
                         <td><a class="btn btn-success" [routerLink]="['/updateStudent',student.id]">Modify</a></td>
