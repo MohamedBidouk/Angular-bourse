@@ -1,0 +1,30 @@
+<div class="container">
+    <div>
+        <h2>Modify student :</h2>
+    </div>
+    <form >
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label >ID Student</label>
+            <input type="number" [(ngModel)]="currentStudent.id" name="id" class="form-control">
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label >CIN Student</label>
+                <input type="number" [(ngModel)]="currentStudent.CIN" name="CIN" class="form-control">
+                </div>
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label >Firstname</label>
+                <input type="text"[(ngModel)]= "currentStudent.firstname" name="firstname" class="form-control">
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label >Lastname</label>
+                <input type="text" [(ngModel)]= "currentStudent.lastname" name="lastname" class="form-control">
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label >Bac generation</label>
+                <input type="number" [(ngModel)]= "currentStudent.bacgeneration" name="bacgeneration" class="form-control">
+            </div>
+    <div class="mt-2">
+        <button type="submit" (click)="updateStudent()" class="btn btn-success">Modifer</button>
+    </div>
+    </form>
+</div>
