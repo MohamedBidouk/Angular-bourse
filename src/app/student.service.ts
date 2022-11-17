@@ -3,6 +3,7 @@ import { Student } from './model/student.model';
 import { Category } from './model/category.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CategoryWrapper } from './model/categoryWrapped.model';
 
 const httpOptions = { headers: new HttpHeaders( {'Content-Type': 'application/json'} )};
 
@@ -12,6 +13,7 @@ providedIn: 'root'
 export class StudentService {
 
   apiURL: string = "http://localhost:8080/Bourse-app/api";
+  apiURLCat: string = "http://localhost:8080/Bourse-app/cat";
 
   students! : Student[]; //un tableau de Produit
   student! : Student;
@@ -54,8 +56,8 @@ export class StudentService {
       });
     }
 
-    listCategorys():Observable<Category[]>{
-      return this.http.get<Category[]>(this.apiURL+"/cat");
+    listCategorys():Observable<CategoryWrapper>{
+      return this.http.get<CategoryWrapper>(this.apiURLCat);
     }
 
     /*consultCategory(id:number): Category{
