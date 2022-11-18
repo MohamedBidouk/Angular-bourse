@@ -1,0 +1,45 @@
+<div class="container">
+
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+            <label>firstname typing</label>
+            <input #firstName [(ngModel)]="searchTerm" name="searchTerm" class="form-control" >
+        </div>
+    </form>
+    <!---<form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+        <label>Nom Produit en tapant</label>
+        <input class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
+        </div>
+     </form>--->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>CIN</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>bacgeneration</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <!---<tbody *ngFor="let student of students">--->
+                <!-- <tbody *ngFor="let student of students | searchFilter:searchTerm  "> -->
+                <tbody *ngFor="let student of students | filter:searchTerm ">
+                    <tr >
+                        <td>{{student.id}}</td>
+                        <td>{{student.cin}}</td>
+                        <td>{{student.firstName}}</td>
+                        <td>{{student.lastName}}</td>
+                        <td>{{student.bacGeneration}}</td>
+                        <td>{{student.category.nameCat}}</td>
+                        <!---<td><a class="btn btn-danger" (click)="deleteStudent(student)">Delete</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updateStudent',student.id]">Modify</a></td>--->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

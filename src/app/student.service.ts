@@ -63,4 +63,18 @@ export class StudentService {
     /*consultCategory(id:number): Category{
       return this.categorys.find(cat => cat.idCat == id)!;
       } */
+
+  searchPerCategory(idCat: number): Observable<Student[]>{
+    const url = `${this.apiURL}/candidscat/${idCat}`;
+    return this.http.get<Student[]>(url);
+  }    
+
+  searchPerFirstname(name: string): Observable<Student[]>{
+    const url = `${this.apiURL}/candidsByFirstname/${name}`;
+    return this.http.get<Student[]>(url);
+  }    
+
+  addCategory( cat: Category):Observable<Category>{
+    return this.http.post<Category>(this.apiURLCat, cat, httpOptions);
+    }
 }

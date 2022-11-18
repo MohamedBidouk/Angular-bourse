@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+        <label>Categories </label>
+        <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="IdCategory" (change)="onChange()">
+        <option *ngFor="let cat of categorys" value="{{cat.idCat}}">
+        {{cat.nameCat}}
+         </option>
+        </select>
+        </div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>CIN</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>bacgeneration</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let student of students">
+                    <tr >
+                        <td>{{student.id}}</td>
+                        <td>{{student.cin}}</td>
+                        <td>{{student.firstName}}</td>
+                        <td>{{student.lastName}}</td>
+                        <td>{{student.bacGeneration}}</td>
+                        <td>{{student.category.nameCat}}</td>
+                        <!---<td><a class="btn btn-danger" (click)="deleteStudent(student)">Delete</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updateStudent',student.id]">Modify</a></td>--->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
