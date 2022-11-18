@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../model/student.model';
+import { AuthService } from '../services/auth.service';
 import { StudentService } from '../student.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { StudentService } from '../student.service';
 export class StudentsComponent implements OnInit {
 
   students! : Student[];
-  constructor(private studentService: StudentService) { 
+  constructor(private studentService: StudentService,
+              public authService: AuthService) { 
     //this.students = studentService.listStudents();
   }
 

@@ -27,4 +27,5 @@ export class SearchPerCategoryComponent implements OnInit {
     this.studentService.searchPerCategory(this.IdCategory).
     subscribe(studs =>{this.students = studs});
     }
+
 }

@@ -15,6 +15,8 @@ import { SearchFilterPipe } from './search-filter.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ListCategorysComponent } from './list-categorys/list-categorys.component';
 import { UpdateCategoryComponent } from './update-category/update-category.component';
+import { LoginComponent } from './login/login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { UpdateCategoryComponent } from './update-category/update-category.compo
     SearchPerFirstnameComponent,
     SearchFilterPipe,
     ListCategorysComponent,
-    UpdateCategoryComponent
+    UpdateCategoryComponent,
+    LoginComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

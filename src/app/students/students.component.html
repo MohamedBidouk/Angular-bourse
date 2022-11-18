@@ -20,8 +20,8 @@
                         <td>{{student.lastName}}</td>
                         <td>{{student.bacGeneration}}</td>
                         <td>{{student.category.nameCat}}</td>
-                        <td><a class="btn btn-danger" (click)="deleteStudent(student)">Delete</a></td>
-                        <td><a class="btn btn-success" [routerLink]="['/updateStudent',student.id]">Modify</a></td>
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="deleteStudent(student)">Delete</a></td>
+                        <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateStudent',student.id]">Modify</a></td>
                     </tr>
                 </tbody>
             </table>
