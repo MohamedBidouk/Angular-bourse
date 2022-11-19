@@ -34,5 +34,21 @@ export class SearchPerFirstnameComponent implements OnInit {
       item.firstName.toLowerCase().includes(filterText));
       }
 
+      loadStudents(){
+        this.studentService.listStudents().subscribe(studs => {
+          console.log(studs);
+          this.students = studs;
+          });
+      }
+    
+      deleteStudent(s : Student){
+        //console.log(s);
+        let conf = confirm("Are you sure ?");
+          if (conf)
+          this.studentService.deleteStudent(s.id).subscribe(() => {
+            console.log("student deleted!");
+            this.loadStudents();
+            });
+      }
   
 }

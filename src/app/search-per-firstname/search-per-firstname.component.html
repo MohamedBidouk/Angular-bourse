@@ -2,7 +2,7 @@
 
     <form class="form-inline">
         <div class="form-group mx-sm-3 mb-2 mt-2 ">
-            <label>firstname typing</label>
+            <label>Firstname &nbsp;</label>
             <input #firstName [(ngModel)]="searchTerm" name="searchTerm" class="form-control" >
         </div>
     </form>
@@ -35,8 +35,8 @@
                         <td>{{student.lastName}}</td>
                         <td>{{student.bacGeneration}}</td>
                         <td>{{student.category.nameCat}}</td>
-                        <!---<td><a class="btn btn-danger" (click)="deleteStudent(student)">Delete</a></td>
-                        <td><a class="btn btn-success" [routerLink]="['/updateStudent',student.id]">Modify</a></td>--->
+                        <td><a class="btn btn-danger" (click)="deleteStudent(student)">Delete</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updateStudent',student.id]">Modify</a></td>
                     </tr>
                 </tbody>
             </table>
