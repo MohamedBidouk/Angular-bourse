@@ -4,6 +4,7 @@ import { Category } from './model/category.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CategoryWrapper } from './model/categoryWrapped.model';
+import { AuthService } from './services/auth.service';
 
 const httpOptions = { headers: new HttpHeaders( {'Content-Type': 'application/json'} )};
 
@@ -18,30 +19,46 @@ export class StudentService {
   students! : Student[]; //un tableau de Produit
   student! : Student;
   //categorys : Category[];
-  constructor(private http : HttpClient) {
+  constructor(private http : HttpClient,
+              private authService: AuthService) {
     
   }
 
   listStudents():Observable<Student[]> {
-    return this.http.get<Student[]>(this.apiURL);
+    /* let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt}) */
+    return this.http.get<Student[]>(this.apiURL+"/all"/* ,{headers:httpHeaders} */);
   }
 
   addStudent( stud: Student): Observable<Student>{
-    return this.http.post<Student>(this.apiURL, stud, httpOptions);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.post<Student>(this.apiURL, stud, {headers:httpHeaders});
   }
 
   deleteStudent( id: number){
     const url = `${this.apiURL}/${id}`;
-      return this.http.delete(url, httpOptions);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+      return this.http.delete(url, {headers:httpHeaders});
     }
 
     consultStudent(id:number): Observable<Student>{
       const url = `${this.apiURL}/${id}`;
-        return this.http.get<Student>(url);
+      let jwt = this.authService.getToken();
+      jwt = "Bearer "+jwt;
+      let httpHeaders = new HttpHeaders({"Authorization":jwt})
+        return this.http.get<Student>(url,{headers:httpHeaders});
       }
 
     updateStudent(stud: Student): Observable<Student>{
-      return this.http.put<Student>(this.apiURL, stud, httpOptions);
+      let jwt = this.authService.getToken();
+      jwt = "Bearer "+jwt;
+      let httpHeaders = new HttpHeaders({"Authorization":jwt})
+        return this.http.put<Student>(this.apiURL, stud, {headers:httpHeaders});
     }
 
     sortStudents(){
@@ -57,7 +74,10 @@ export class StudentService {
     }
 
     listCategorys():Observable<CategoryWrapper>{
-      return this.http.get<CategoryWrapper>(this.apiURLCat);
+      let jwt = this.authService.getToken();
+      jwt = "Bearer "+jwt;
+      let httpHeaders = new HttpHeaders({"Authorization":jwt})
+      return this.http.get<CategoryWrapper>(this.apiURLCat,{headers:httpHeaders});
     }
 
     /*consultCategory(id:number): Category{
@@ -66,12 +86,18 @@ export class StudentService {
 
   searchPerCategory(idCat: number): Observable<Student[]>{
     const url = `${this.apiURL}/candidscat/${idCat}`;
-    return this.http.get<Student[]>(url);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get<Student[]>(url,{headers:httpHeaders});
   }    
 
   searchPerFirstname(name: string): Observable<Student[]>{
     const url = `${this.apiURL}/candidsByFirstname/${name}`;
-    return this.http.get<Student[]>(url);
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get<Student[]>(url,{headers:httpHeaders});
   }    
 
   addCategory( cat: Category):Observable<Category>{

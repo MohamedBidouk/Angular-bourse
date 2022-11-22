@@ -8,7 +8,7 @@ import { StudentsComponent } from './students/students.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateStudentComponent } from './update-student/update-student.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SearchPerCategoryComponent } from './search-per-category/search-per-category.component';
 import { SearchPerFirstnameComponent } from './search-per-firstname/search-per-firstname.component';
 import { SearchFilterPipe } from './search-filter.pipe';
@@ -17,6 +17,7 @@ import { ListCategorysComponent } from './list-categorys/list-categorys.componen
 import { UpdateCategoryComponent } from './update-category/update-category.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { TokenInterceptor } from './services/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     HttpClientModule,
     Ng2SearchPipeModule
   ],
-  providers: [],
+  providers: [{ provide : HTTP_INTERCEPTORS,
+                useClass : TokenInterceptor,
+                multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
