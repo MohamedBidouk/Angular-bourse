@@ -17,13 +17,13 @@ export class TokenInterceptor implements HttpInterceptor {
     const toExclude = "/login"
 
     if(request.url.search(toExclude) === -1){
-      console.log("request = " +request);
+      console.log("request = " +request.context);
       
       let jwt = this.authService.getToken();
     let reqWithToken = request.clone( {
     setHeaders: { Authorization : "Bearer "+jwt}
     } );
-    console.log("final request = " +reqWithToken);
+    console.log("final request = " +reqWithToken.context);
       return next.handle(reqWithToken);
     }
     return next.handle(request);

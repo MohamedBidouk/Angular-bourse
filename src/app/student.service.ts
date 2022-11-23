@@ -46,19 +46,21 @@ export class StudentService {
       return this.http.delete(url, {headers:httpHeaders});
     }
 
+    deleteCategory( id: number){
+      const url = `${this.apiURLCat}/${id}`;
+      console.log(this.apiURLCat)
+        return this.http.delete(url);
+      }
+
     consultStudent(id:number): Observable<Student>{
       const url = `${this.apiURL}/${id}`;
-      let jwt = this.authService.getToken();
-      jwt = "Bearer "+jwt;
-      let httpHeaders = new HttpHeaders({"Authorization":jwt})
-        return this.http.get<Student>(url,{headers:httpHeaders});
+      
+        return this.http.get<Student>(url);
       }
 
     updateStudent(stud: Student): Observable<Student>{
-      let jwt = this.authService.getToken();
-      jwt = "Bearer "+jwt;
-      let httpHeaders = new HttpHeaders({"Authorization":jwt})
-        return this.http.put<Student>(this.apiURL, stud, {headers:httpHeaders});
+
+        return this.http.put<Student>(this.apiURL, stud);
     }
 
     sortStudents(){

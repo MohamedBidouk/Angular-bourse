@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../model/category.model';
+import { AuthService } from '../services/auth.service';
 import { StudentService } from '../student.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class ListCategorysComponent implements OnInit {
   updatedCat:Category = {"idCat":0,"nameCat":"", descriptionCat:"last year"};
   ajout:boolean=true;
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService,
+                      public authService: AuthService) { }
 
   ngOnInit(): void {
     this.studentService.listCategorys().
@@ -27,16 +29,27 @@ export class ListCategorysComponent implements OnInit {
      subscribe( ()=> this.loadCategorys());
     }
 
-    loadCategorys(){
-      this.studentService.listCategorys().
-      subscribe(cats => {this.categories = cats._embedded.categories;
+  loadCategorys(){
+    this.studentService.listCategorys().
+    subscribe(cats => {this.categories = cats._embedded.categories;
       console.log(cats);
-      });
-      }
+    });
+    }
 
-      updateCat(cat:Category) {
-        this.updatedCat=cat;
-        this.ajout=false; 
-        }
+  updateCat(cat:Category) {
+    this.updatedCat=cat;
+    this.ajout=false; 
+  }
+
+  deleteCategory(cat : Category){
+    //console.log(s);
+    let conf = confirm("Are you sure ?");
+      if (conf)
+      this.studentService.deleteCategory(cat.idCat).subscribe(() => {
+        console.log("Category deleted!");
+        this.loadCategorys();
+        });
+  }
+
 
 }

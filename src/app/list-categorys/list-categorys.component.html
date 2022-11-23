@@ -20,6 +20,7 @@
                 <td>{{cat.idCat}}</td>
                 <td>{{cat.nameCat}}</td>
                 <td>{{cat.descriptionCat}}</td>
+                <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="deleteCategory(cat)">Delete</a></td>
                 <td><a class="btn btn-success" (click)="updateCat(cat)">Edit</a></td>
                 </tr>
                 </tbody>
