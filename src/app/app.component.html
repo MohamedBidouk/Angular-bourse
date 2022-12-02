@@ -17,12 +17,12 @@
         <!-- Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Students</a>
-          <div class="dropdown-menu">
+          <div *ngIf="authService.isloggedIn" class="dropdown-menu">
           <a *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/add-student">Add</a>
           <a class="dropdown-item" href="#">List</a>
           <a class="dropdown-item" routerLink="/searchPerCategory" >Search per category</a>
           <a class="dropdown-item" routerLink="/searchPerFirstnam" >Search per firstname</a>
-          <a class="dropdown-item" routerLink="/listCategorys" >Manage Categories</a>
+          <a *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/listCategorys" >Manage Categories</a>
           </div>
         </li>
       </ul>
